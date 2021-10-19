@@ -1,0 +1,49 @@
+.welcome-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  background-color: rgba(49, 120, 198, 1);
+  color: white;
+  margin: 15px;
+  padding: 10px;
+  border: solid black thin;
+  border-radius: 5px;
+}
+
+.join-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  /* width: 100px; */
+  background-color: rgba(49, 120, 198, 1);
+  color: white;
+  padding: 10px;
+  border: solid black thin;
+  border-radius: 0px 5px 5px 0px;
+  border-left: none;
+  /* border: none; */
+}
+
+.gameId-input {
+  /* height: 30px; */
+  border: solid;
+  border-radius: 5px 0px 0px 5px;
+  border-right: none;
+  border-color: black;
+  border-width: thin;
+  /* border: none; */
+}
+
+.join-form {
+  display: flex;
+  /* border: solid;
+  border-radius: 5px; */
+}
