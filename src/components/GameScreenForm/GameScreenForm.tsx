@@ -1,12 +1,19 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
+import { useParams } from "react-router-dom";
+import Form from "../Form/Form";
 
 interface GameScreenFormProps {}
 
+interface IdType {
+  id: string;
+}
+
 const GameScreenForm: FunctionComponent<GameScreenFormProps> = () => {
+  const { id } = useParams<IdType>();
   return (
-    <>
-      <h1>GameScreenForm</h1>
-    </>
+    <div className="game-form">
+      <Form id={id} />
+    </div>
   );
 };
 
