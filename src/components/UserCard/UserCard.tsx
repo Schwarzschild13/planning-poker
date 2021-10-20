@@ -28,7 +28,7 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
         <p>{user.id === currUser ? "(You)" : " "}</p>
       </div>
       <div className={`card ${!user.flip ? "card-flipped" : " "} `}>
-        {user.flip && <p>{user.num}</p>}
+        {user.flip && <p>{user.num === 0 ? "Empty" : user.num}</p>}
       </div>
     </div>
   );
