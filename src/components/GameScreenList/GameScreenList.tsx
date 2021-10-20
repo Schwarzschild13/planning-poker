@@ -107,7 +107,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   return (
     <div>
       <div className="room-data">
-        <p>Hello, {`${userName}`}</p>
+        <p>Hello, {userName && <span>{`${userName}`}</span>}</p>
         <p>
           <b>Room Id:</b> {id}
         </p>

@@ -11,13 +11,14 @@ function App() {
   return (
     <AdminProvider>
       <div className="App">
-        <Navbar />
         <Router>
           <Switch>
             <Route exact path="/">
+              <Navbar />
               <Welcome />
             </Route>
             <Route exact path="/:id">
+              <Navbar />
               <GameScreenForm />
             </Route>
             <Route exact path="/game/:id">
