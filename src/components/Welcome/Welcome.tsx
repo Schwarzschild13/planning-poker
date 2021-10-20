@@ -29,7 +29,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         <button onClick={createGame} className="create-btn">
           Create Game
         </button>
-
+        <p>OR</p>
         <div className="join-form">
           <input
             className="gameId-input"

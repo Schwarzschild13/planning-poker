@@ -4,6 +4,7 @@ import firebase from "../../utils/Firebase";
 import { AdminContext } from "../../context/Context";
 import { useLocalStorage } from "../useLocalStorage";
 import { UserType } from "../../types/UserType";
+import "./Form.css";
 
 interface FormProps {
   id: string;
@@ -62,7 +63,7 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
     toList();
   };
   return (
-    <div>
+    <div className="username-form">
       <form
         action="submit"
         onSubmit={(e) => {
@@ -70,8 +71,13 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
           createUser();
         }}
       >
-        <label htmlFor="name"> Enter name</label>
-        <input type="text" onChange={handleOnChange} value={title} />
+        <div>Enter your name:</div>
+        <input
+          type="text"
+          onChange={handleOnChange}
+          value={title}
+          placeholder="Name"
+        />
         <button type="submit">Submit</button>
       </form>
     </div>
