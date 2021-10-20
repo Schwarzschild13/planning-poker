@@ -104,7 +104,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       <div className="fib-select">
         <div>
           <button
-            className="exit-btn"
+            className="exit-btn btn"
             onClick={() => {
               deleteUser();
             }}
@@ -112,18 +112,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
             Exit
           </button>
         </div>
-        <form
-          action="submit"
-          onSubmit={(e) => {
-            e.preventDefault();
-            if (num !== 0) {
-              submitNum();
-              console.log("submitted:", num);
-            } else {
-              alert("Please select a number");
-            }
-          }}
-        >
+        <div className="num-select-div">
           {React.createElement(
             "select",
             {
@@ -151,25 +140,33 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
               );
             })
           )}
-          <button className="submit-btn" type="submit">
+        </div>
+        <div>
+          <button
+            className="submit-btn btn"
+            type="submit"
+            onClick={() => {
+              if (num !== 0) {
+                submitNum();
+                console.log("submitted:", num);
+              } else {
+                alert("Please select a number");
+              }
+            }}
+          >
             Submit
           </button>
-        </form>
+        </div>
       </div>
-      <div className="flip-btn">
+      <div className="flip-btn-div">
         <button
+          className="btn flip-btn"
           onClick={() => {
             flipCards();
-          }}
-        >
-          Flip all cards
-        </button>
-        <button
-          onClick={() => {
             console.log(averageScore());
           }}
         >
-          Average
+          Flip all cards
         </button>
       </div>
 
