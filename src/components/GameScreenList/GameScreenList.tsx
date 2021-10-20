@@ -30,6 +30,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const [userName, setUserName] = useState<string>();
   const [usersList, setUsersList] = useState<Array<UserType>>();
   const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const [admin, setAdmin] = useState<boolean>();
   const [avg, setAvg] = useState<boolean>(false);
 
   useEffect(() => {
@@ -40,17 +41,20 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       for (let id in users) {
         usersList.push({ id, ...users[id] });
       }
+
       setUsersList(usersList);
       if (users !== null) {
         setUserName(users[userId]?.title);
+        setAdmin(users[userId]?.isAdmin);
       }
     });
     // setAvg(false);
+    setAvg(true);
   }, []);
 
-  // window.onunload = () => {
-  //   deleteUser();
-  // };
+  window.onunload = () => {
+    flipCards(false);
+  };
 
   // window.addEventListener("beforeunload", (event) => {
   //   event.returnValue = `Are you sure you want to leave?`;
@@ -75,7 +79,11 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         sum = sum + user.num;
       }
     });
-    return Math.round(sum / count);
+    if (count === 0 || sum === 0) {
+      return -1;
+    } else {
+      return Math.round(sum / count);
+    }
   };
 
   const onExit = () => {
@@ -100,7 +108,9 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
     <div>
       <div className="room-data">
         <p>Hello, {`${userName}`}</p>
-        <p>Room Id: {id}</p>
+        <p>
+          <b>Room Id:</b> {id}
+        </p>
       </div>
 
       <div className="fib-select">
@@ -160,31 +170,42 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           </button>
         </div>
       </div>
-      <div className="flip-btn-div">
-        <button
-          className="btn flip-btn"
-          onClick={() => {
-            flipCards(true);
-            setAvg(false);
-            console.log(averageScore());
-          }}
-        >
-          Flip all cards
-        </button>
+      {admin && (
+        <div className="flip-btn-div">
+          <button
+            className="btn flip-btn"
+            onClick={() => {
+              if (averageScore() !== -1) {
+                flipCards(true);
+                setAvg(false);
+                console.log(averageScore());
+              } else {
+                alert("Select a number and click submit");
+              }
+            }}
+          >
+            Flip all cards
+          </button>
 
-        <button
-          className="reset btn"
-          onClick={() => {
-            setAvg(true);
-            flipCards(false);
-          }}
-        >
-          Reset
-        </button>
+          <button
+            className="reset btn"
+            onClick={() => {
+              setAvg(true);
+              flipCards(false);
+            }}
+          >
+            Reset
+          </button>
 
-        {!avg && <div className="avg-disp">{`Average: ${averageScore()}`}</div>}
-      </div>
-
+          {avg ? (
+            ""
+          ) : (
+            <div className="avg-disp">{`${
+              averageScore() === -1 ? "" : `Average: ${averageScore()}`
+            }`}</div>
+          )}
+        </div>
+      )}
       {/* game list */}
 
       <div className="game-list">
