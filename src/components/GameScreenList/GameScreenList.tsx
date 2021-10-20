@@ -12,6 +12,7 @@ import UserCardList from "../UserCardList/UserCardList";
 import "./GameScreenList.css";
 import { useHistory } from "react-router-dom";
 import { AdminContext } from "../../context/Context";
+import "./GameScreenList.css";
 
 interface GameScreenListProps {}
 
@@ -95,16 +96,22 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
 
   return (
     <div>
-      <p>Hello, {`${userName}`}</p>
-      <p>Room Id: {id}</p>
-      <button
-        onClick={() => {
-          deleteUser();
-        }}
-      >
-        Exit
-      </button>
+      <div className="room-data">
+        <p>Hello, {`${userName}`}</p>
+        <p>Room Id: {id}</p>
+      </div>
+
       <div className="fib-select">
+        <div>
+          <button
+            className="exit-btn"
+            onClick={() => {
+              deleteUser();
+            }}
+          >
+            Exit
+          </button>
+        </div>
         <form
           action="submit"
           onSubmit={(e) => {
@@ -121,6 +128,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
             "select",
             {
               name: "fib",
+              className: "num-select",
               onChange: (e: ChangeEvent<HTMLSelectElement>) => {
                 setNum(parseInt(e.target.value));
               },
@@ -143,24 +151,26 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
               );
             })
           )}
-          <button type="submit">Submit</button>
+          <button className="submit-btn" type="submit">
+            Submit
+          </button>
         </form>
-        <div className="flip-btn">
-          <button
-            onClick={() => {
-              flipCards();
-            }}
-          >
-            Flip all cards
-          </button>
-          <button
-            onClick={() => {
-              console.log(averageScore());
-            }}
-          >
-            Average
-          </button>
-        </div>
+      </div>
+      <div className="flip-btn">
+        <button
+          onClick={() => {
+            flipCards();
+          }}
+        >
+          Flip all cards
+        </button>
+        <button
+          onClick={() => {
+            console.log(averageScore());
+          }}
+        >
+          Average
+        </button>
       </div>
 
       {/* game list */}
