@@ -30,6 +30,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const [userName, setUserName] = useState<string>();
   const [usersList, setUsersList] = useState<Array<UserType>>();
   const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const [avg, setAvg] = useState<boolean>(false);
 
   useEffect(() => {
     const userRef = firebase.database().ref(id);
@@ -44,6 +45,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         setUserName(users[userId]?.title);
       }
     });
+    // setAvg(false);
   }, []);
 
   // window.onunload = () => {
@@ -55,11 +57,11 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   //   console.log("eventListener");
   // });
 
-  const flipCards = () => {
+  const flipCards = (a: boolean) => {
     usersList?.map((user) => {
       const userRef = firebase.database().ref(id).child(user.id);
       userRef.update({
-        flip: !user.flip,
+        flip: a,
       });
     });
   };
@@ -162,12 +164,25 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         <button
           className="btn flip-btn"
           onClick={() => {
-            flipCards();
+            flipCards(true);
+            setAvg(false);
             console.log(averageScore());
           }}
         >
           Flip all cards
         </button>
+
+        <button
+          className="reset btn"
+          onClick={() => {
+            setAvg(true);
+            flipCards(false);
+          }}
+        >
+          Reset
+        </button>
+
+        {!avg && <div className="avg-disp">{`Average: ${averageScore()}`}</div>}
       </div>
 
       {/* game list */}

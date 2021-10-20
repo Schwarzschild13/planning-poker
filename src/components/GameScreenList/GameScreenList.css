@@ -1,6 +1,6 @@
-.game-list {
+/* .game-list {
   background-color: blue;
-}
+} */
 .fib-select {
   /* background-color: indianred; */
   padding: 20px 20%;
@@ -74,5 +74,15 @@
 
 .flip-btn {
   background-color: #007bff;
-  padding: 0px 20px;
+  padding: 0px 15px;
+}
+
+.reset {
+  background-color: grey;
+  margin: 0px 10px;
+  padding: 0px 15px;
+}
+
+.avg-disp {
+  padding: 20px 0px 0px;
 }

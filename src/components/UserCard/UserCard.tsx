@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import firebase from "../../utils/Firebase";
 import "../../App.css";
 import { UserType } from "../../types/UserType";
@@ -10,6 +10,12 @@ interface UserCardProps {
 }
 
 const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
+  const currUser = JSON.parse(localStorage.getItem("currentUserId")!);
+
+  useEffect(() => {
+    console.log(`${user.num}`);
+  }, [user.num]);
+
   const deleteUser = () => {
     const userRef = firebase.database().ref(`${id}`).child(user!.id);
     userRef.remove();
@@ -17,9 +23,13 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
 
   return (
     <div className="user-card">
-      <h1>{user!.title}</h1>
-      {user.flip && <h1>{user.num}</h1>}
-      {/* <button onClick={deleteUser}>Delete</button> */}
+      <div className="user-details">
+        <div>{user!.title}</div>
+        <p>{user.id === currUser ? "(You)" : " "}</p>
+      </div>
+      <div className={`card ${!user.flip ? "card-flipped" : " "} `}>
+        {user.flip && <p>{user.num}</p>}
+      </div>
     </div>
   );
 };
