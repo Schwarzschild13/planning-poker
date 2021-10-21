@@ -1,4 +1,5 @@
-import { FunctionComponent, useContext } from "react";
+import firebase from "firebase/compat";
+import { FunctionComponent, useContext, useState } from "react";
 import { useHistory } from "react-router";
 import { v1 as uuidv1 } from "uuid";
 import { AdminContext } from "../../context/Context";
@@ -8,6 +9,7 @@ interface WelcomeProps {}
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
   const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const [games, setGames] = useState<Array<string>>();
 
   let gameId: string;
   const history = useHistory();
@@ -17,9 +19,31 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
     toggleAdmin();
   };
 
+  // const fun = () => {
+  //   const userRef = firebase.database().ref(gameId);
+  //   userRef.on("value", (snapshot) => {
+  //     const users = snapshot.val();
+  //     const usersList = [];
+  //     for (let id in users) {
+  //       usersList.push(id);
+  //     }
+  //     setGames(usersList);
+  //   });
+  // };
+
+  const checkUuid = (gameId: string) => {
+    const regexExp =
+      /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
+    return regexExp.test(gameId);
+  };
+
   const joinGame = (gameId: string) => {
-    let path = `/${gameId}`;
-    history.push(path);
+    if (checkUuid(gameId)) {
+      let path = `/${gameId}`;
+      history.push(path);
+    } else {
+      alert("Invalid game id");
+    }
   };
 
   return (
