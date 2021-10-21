@@ -65,20 +65,26 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
   return (
     <div className="username-form">
       <form
+        className="form-container"
         action="submit"
         onSubmit={(e) => {
           e.preventDefault();
           createUser();
         }}
       >
-        <div>Enter your name:</div>
-        <input
-          type="text"
-          onChange={handleOnChange}
-          value={title}
-          placeholder="Name"
-        />
-        <button type="submit">Submit</button>
+        <div className="input-label">Enter your name:</div>
+        <div className="name-input-body">
+          <input
+            className="name-input"
+            type="text"
+            onChange={handleOnChange}
+            value={title}
+            placeholder="Name"
+          />
+          <button className="btn name-submit-btn" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   );
