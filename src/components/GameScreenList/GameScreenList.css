@@ -1,6 +1,11 @@
 /* .game-list {
   background-color: blue;
 } */
+
+button {
+  font-size: 16px;
+}
+
 .fib-select {
   /* background-color: indianred; */
   padding: 20px 20%;
