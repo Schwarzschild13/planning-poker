@@ -69,7 +69,11 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
         action="submit"
         onSubmit={(e) => {
           e.preventDefault();
-          createUser();
+          if (title !== "") {
+            createUser();
+          } else {
+            alert("Enter your name");
+          }
         }}
       >
         <div className="input-label">Enter your name:</div>
