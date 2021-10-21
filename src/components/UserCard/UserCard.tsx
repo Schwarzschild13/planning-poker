@@ -7,9 +7,10 @@ import "./UserCard.css";
 interface UserCardProps {
   user: UserType;
   id: string;
+  isSubmit: boolean;
 }
 
-const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
+const UserCard: FunctionComponent<UserCardProps> = ({ user, id, isSubmit }) => {
   const currUser = JSON.parse(localStorage.getItem("currentUserId")!);
 
   useEffect(() => {
@@ -27,7 +28,12 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
         <div>{user!.title}</div>
         <p>{user.id === currUser ? "(You)" : " "}</p>
       </div>
-      <div className={`card ${!user.flip ? "card-flipped" : " "} `}>
+
+      <div
+        className={`card ${!user.flip ? "card-back" : " "} 
+        ${user.flip === false && user.num !== 0 ? "card-back-ready" : " "}
+      `}
+      >
         {user.flip && <p>{user.num === 0 ? "Empty" : user.num}</p>}
       </div>
     </div>

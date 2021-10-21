@@ -23,17 +23,17 @@ interface IdType {
 const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const fib = [1, 2, 3, 5, 8, 13, 21, 34];
   const [num, setNum] = useState(0);
-  const [userList, setUserList] = useState<Array<UserType>>();
+  // const [userList, setUserList] = useState<Array<UserType>>();
   const { id } = useParams<IdType>();
   const userId = JSON.parse(localStorage.getItem("currentUserId")!);
   const history = useHistory();
   const [userName, setUserName] = useState<string>();
   const [usersList, setUsersList] = useState<Array<UserType>>();
-  const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  // const { isAdmin, toggleAdmin } = useContext(AdminContext);
   const [admin, setAdmin] = useState<boolean>();
   const [avg, setAvg] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
-  const [isSubmit, setIsSubmit] = useState<boolean>();
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   useEffect(() => {
     const userRef = firebase.database().ref(id);
@@ -56,6 +56,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
 
   window.onunload = () => {
     flipCards(false);
+    onReset();
   };
 
   // window.addEventListener("beforeunload", (event) => {
@@ -68,6 +69,15 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       const userRef = firebase.database().ref(id).child(user.id);
       userRef.update({
         flip: a,
+      });
+    });
+  };
+
+  const onReset = () => {
+    usersList?.map((user) => {
+      const userRef = firebase.database().ref(id).child(user.id);
+      userRef.update({
+        num: 0,
       });
     });
   };
@@ -222,6 +232,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
             onClick={() => {
               setAvg(true);
               flipCards(false);
+              onReset();
             }}
           >
             Reset
@@ -239,7 +250,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       {/* game list */}
 
       <div className="game-list">
-        <UserCardList id={id} />
+        <UserCardList id={id} isSubmit={isSubmit} />
       </div>
     </div>
   );
