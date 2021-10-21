@@ -16,11 +16,11 @@ const UserCard: FunctionComponent<UserCardProps> = ({ user, id, isSubmit }) => {
   // const userId = JSON.parse(localStorage.getItem("currentUserId")!);
   // const [admin, setAdmin] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("currennt user: ", currUser);
-    console.log("currennt user id: ", userId);
-    console.log("admin status is: ", admin);
-  }, []);
+  // useEffect(() => {
+  //   console.log("currennt user: ", currUser);
+  //   console.log("currennt user id: ", userId);
+  //   console.log("admin status is: ", admin);
+  // }, []);
 
   // useEffect(() => {
   //   const userRef = firebase.database().ref(id);
