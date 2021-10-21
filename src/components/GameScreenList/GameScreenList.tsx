@@ -32,6 +32,8 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const { isAdmin, toggleAdmin } = useContext(AdminContext);
   const [admin, setAdmin] = useState<boolean>();
   const [avg, setAvg] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>();
 
   useEffect(() => {
     const userRef = firebase.database().ref(id);
@@ -104,6 +106,19 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
     });
   };
 
+  const invite = () => {
+    const el = document.createElement("input");
+    el.value = `${window.location.origin}/${id}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand("copy");
+    document.body.removeChild(el);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
+  };
+
   return (
     <div>
       <div className="navbar-gamescreen">
@@ -118,6 +133,14 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         <p>
           <b>Room Id:</b> {id}
         </p>
+        <button
+          className={`game-btn ${copied ? "copied-btn" : "copy-btn"}`}
+          onClick={() => {
+            invite();
+          }}
+        >
+          {copied ? "Copied!" : "Copy Invite Link"}
+        </button>
       </div>
 
       <div className="fib-select">
