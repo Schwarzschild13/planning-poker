@@ -81,7 +81,7 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
             value={title}
             placeholder="Name"
           />
-          <button className="btn name-submit-btn" type="submit">
+          <button className="form-btn name-submit-btn" type="submit">
             Submit
           </button>
         </div>

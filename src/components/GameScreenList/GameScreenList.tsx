@@ -106,8 +106,15 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
 
   return (
     <div>
+      <div className="navbar-gamescreen">
+        <h1>Planning poker</h1>
+        {userName && (
+          <p>
+            Hello, <b>{`${userName}`}</b>
+          </p>
+        )}
+      </div>
       <div className="room-data">
-        <p>Hello, {userName && <span>{`${userName}`}</span>}</p>
         <p>
           <b>Room Id:</b> {id}
         </p>
@@ -116,7 +123,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       <div className="fib-select">
         <div>
           <button
-            className="exit-btn btn"
+            className="exit-btn game-btn"
             onClick={() => {
               deleteUser();
             }}
@@ -155,7 +162,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         </div>
         <div>
           <button
-            className="submit-btn btn"
+            className="submit-btn game-btn"
             type="submit"
             onClick={() => {
               if (num !== 0) {
@@ -173,7 +180,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       {admin && (
         <div className="flip-btn-div">
           <button
-            className="btn flip-btn"
+            className="game-btn flip-btn"
             onClick={() => {
               if (averageScore() !== -1) {
                 flipCards(true);
@@ -188,7 +195,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           </button>
 
           <button
-            className="reset btn"
+            className="reset game-btn"
             onClick={() => {
               setAvg(true);
               flipCards(false);
