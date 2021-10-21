@@ -13,6 +13,7 @@ import "./GameScreenList.css";
 import { useHistory } from "react-router-dom";
 import { AdminContext } from "../../context/Context";
 import "./GameScreenList.css";
+// import { useLocalStorage } from "../useLocalStorage";
 
 interface GameScreenListProps {}
 
@@ -34,6 +35,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const [avg, setAvg] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  // const [state, setState] = useLocalStorage("currentUserId", "");
 
   useEffect(() => {
     const userRef = firebase.database().ref(id);
@@ -106,6 +108,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const deleteUser = () => {
     const userRef = firebase.database().ref(id).child(userId);
     userRef.remove();
+    // setState("");
     onExit();
   };
 
@@ -237,15 +240,14 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           >
             Reset
           </button>
-
-          {avg ? (
-            ""
-          ) : (
-            <div className="avg-disp">{`${
-              averageScore() === -1 ? "" : `Average: ${averageScore()}`
-            }`}</div>
-          )}
         </div>
+      )}
+      {avg ? (
+        ""
+      ) : (
+        <div className="avg-disp">{`${
+          averageScore() === -1 ? "" : `Average: ${averageScore()}`
+        }`}</div>
       )}
       {/* game list */}
 

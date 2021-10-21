@@ -95,7 +95,8 @@ button {
 }
 
 .avg-disp {
-  padding: 20px 0px 0px;
+  padding: 0px 0px 10px;
+  font-size: 22px;
 }
 
 .navbar-gamescreen {
