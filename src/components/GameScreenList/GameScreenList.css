@@ -1,13 +1,8 @@
-/* .game-list {
-  background-color: blue;
-} */
-
 button {
   font-size: 16px;
 }
 
 .fib-select {
-  /* background-color: indianred; */
   padding: 20px 20%;
   display: flex;
   justify-content: center;
@@ -31,14 +26,8 @@ button {
   font-size: 16px;
 }
 
-/* .submit-btn {
-  height: calc(1.5em + 0.5rem + 2px);
-} */
-
 .game-btn {
-  /* height: calc(1.5em + 0.5rem + 2px); */
   border-radius: 5px;
-  /* border: solid thin grey; */
   border: none;
   color: white;
   height: 40px;
@@ -47,21 +36,17 @@ button {
 .exit-btn {
   background-color: #dc3545;
   padding: 0px 30px;
-  /* height: 40px; */
 }
 
 .submit-btn {
   background-color: #007bff;
   padding: 0px 30px;
   box-sizing: border-box;
-  /* height: calc(1.5em + 0.5rem + 2px); */
-  /* height: 40px; */
 }
 
 .num-select {
   display: inline-block;
   width: 100%;
-  /* height: calc(1.5em + 0.5rem + 2px); */
   height: 40px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -74,6 +59,7 @@ button {
   border-radius: 5px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .num-select-div {
   flex-grow: 2;
   margin: 0px 10px;
@@ -122,11 +108,9 @@ button {
 
 .copy-btn {
   background-color: #007bff;
-  /* width: 80px; */
   padding: 0px 10px;
 }
 .copied-btn {
   background-color: #28a745;
   width: 100px;
-  /* padding: 0px 60px; */
 }

@@ -1,5 +1,4 @@
 .username-form {
-  /* transform: translateY(50%); */
   height: fit-content;
   height: 85vh;
 }
@@ -7,33 +6,35 @@
 .form-btn {
   height: calc(1.5em + 0.5rem + 2px);
   border-radius: 5px;
-  /* border: solid thin grey; */
   border: none;
   color: white;
 }
+
 .name-submit-btn {
   background-color: #007bff;
   padding: 10px 20px;
   height: 45px;
   margin-left: 10px;
-  /* box-sizing: border-box; */
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
 }
+
 .input-label {
   align-self: flex-start;
   margin: 20px 10px 10px;
   margin-left: 20%;
 }
+
 .name-input-body {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
+
 .name-input {
   display: inline-block;
   width: 50%;

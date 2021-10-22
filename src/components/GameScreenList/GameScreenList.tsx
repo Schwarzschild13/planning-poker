@@ -2,18 +2,13 @@ import firebase from "firebase/compat";
 import React, {
   ChangeEvent,
   FunctionComponent,
-  useContext,
   useEffect,
   useState,
 } from "react";
-import { useParams } from "react-router-dom";
 import { UserType } from "../../types/UserType";
 import UserCardList from "../UserCardList/UserCardList";
+import { useParams, useHistory } from "react-router-dom";
 import "./GameScreenList.css";
-import { useHistory } from "react-router-dom";
-import { AdminContext } from "../../context/Context";
-import "./GameScreenList.css";
-// import { useLocalStorage } from "../useLocalStorage";
 
 interface GameScreenListProps {}
 
@@ -23,19 +18,16 @@ interface IdType {
 
 const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const fib = [1, 2, 3, 5, 8, 13, 21, 34];
-  const [num, setNum] = useState(0);
-  // const [userList, setUserList] = useState<Array<UserType>>();
-  const { id } = useParams<IdType>();
-  const userId = JSON.parse(localStorage.getItem("currentUserId")!);
   const history = useHistory();
-  const [userName, setUserName] = useState<string>();
-  const [usersList, setUsersList] = useState<Array<UserType>>();
-  // const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const [num, setNum] = useState(0);
+  const { id } = useParams<IdType>();
   const [admin, setAdmin] = useState<boolean>();
   const [avg, setAvg] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>();
   const [copied, setCopied] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  // const [state, setState] = useLocalStorage("currentUserId", "");
+  const [usersList, setUsersList] = useState<Array<UserType>>();
+  const userId = JSON.parse(localStorage.getItem("currentUserId")!);
 
   useEffect(() => {
     const userRef = firebase.database().ref(id);
@@ -52,19 +44,14 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
         setAdmin(users[userId]?.isAdmin);
       }
     });
-    // setAvg(false);
     setAvg(true);
   }, []);
 
+  // Reset on page reload
   window.onunload = () => {
     flipCards(false);
     onReset();
   };
-
-  // window.addEventListener("beforeunload", (event) => {
-  //   event.returnValue = `Are you sure you want to leave?`;
-  //   console.log("eventListener");
-  // });
 
   const flipCards = (a: boolean) => {
     usersList?.map((user) => {
@@ -108,7 +95,6 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const deleteUser = () => {
     const userRef = firebase.database().ref(id).child(userId);
     userRef.remove();
-    // setState("");
     onExit();
   };
 
@@ -249,6 +235,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           averageScore() === -1 ? "" : `Average: ${averageScore()}`
         }`}</div>
       )}
+
       {/* game list */}
 
       <div className="game-list">

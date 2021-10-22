@@ -9,7 +9,7 @@ interface WelcomeProps {}
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
   const { isAdmin, toggleAdmin } = useContext(AdminContext);
-  const [games, setGames] = useState<Array<string>>();
+  // const [games, setGames] = useState<Array<string>>();
 
   let gameId: string;
   const history = useHistory();
@@ -18,6 +18,8 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
     history.push(path);
     toggleAdmin();
   };
+
+  // Check for valid games before joining a game
 
   // const fun = () => {
   //   const userRef = firebase.database().ref(gameId);
@@ -30,6 +32,8 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
   //     setGames(usersList);
   //   });
   // };
+
+  // check if entered join room id is valid
 
   const checkUuid = (gameId: string) => {
     const regexExp =
