@@ -23,6 +23,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const { id } = useParams<IdType>();
   const [admin, setAdmin] = useState<boolean>();
   const [avg, setAvg] = useState<boolean>(false);
+  const [userNum, setUserNum] = useState<number>();
   const [userName, setUserName] = useState<string>();
   const [copied, setCopied] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
@@ -42,10 +43,21 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       if (users !== null) {
         setUserName(users[userId]?.title);
         setAdmin(users[userId]?.isAdmin);
+        setUserNum(users[userId]?.num);
       }
     });
     setAvg(true);
   }, []);
+
+  useEffect(() => {
+    if (userNum !== 0) {
+      setIsSubmit(true);
+      console.log("useeffect true");
+    } else {
+      setIsSubmit(false);
+      console.log("useeffect false");
+    }
+  }, [userNum]);
 
   // Reset on page reload
   window.onunload = () => {
@@ -161,6 +173,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
               className: "num-select",
               onChange: (e: ChangeEvent<HTMLSelectElement>) => {
                 setNum(parseInt(e.target.value));
+                setIsSubmit(false);
               },
             },
             React.createElement(
@@ -183,20 +196,28 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           )}
         </div>
         <div>
-          <button
-            className="submit-btn game-btn"
-            type="submit"
-            onClick={() => {
-              if (num !== 0) {
-                submitNum();
-                console.log("submitted:", num);
-              } else {
-                alert("Please select a number");
-              }
-            }}
-          >
-            Submit
-          </button>
+          {!isSubmit && (
+            <button
+              className="submit-btn game-btn"
+              type="submit"
+              onClick={() => {
+                if (num !== 0) {
+                  submitNum();
+                  console.log("submitted:", num);
+                } else {
+                  alert("Please select a number");
+                }
+              }}
+            >
+              Submit
+            </button>
+          )}
+          {isSubmit && (
+            <button disabled className="submit-btn game-btn">
+              Submitted ✓
+            </button>
+          )}
+          {/* {!isSubmit && <button>test</button>} */}
         </div>
       </div>
       {admin && (
