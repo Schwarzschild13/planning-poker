@@ -6,13 +6,9 @@ import "./UserCardList.css";
 
 interface UserCardListProps {
   id: string;
-  isSubmit: boolean;
 }
 
-const UserCardList: FunctionComponent<UserCardListProps> = ({
-  id,
-  isSubmit,
-}) => {
+const UserCardList: FunctionComponent<UserCardListProps> = ({ id }) => {
   const [userList, setUserList] = useState<Array<UserType>>();
 
   useEffect(() => {
@@ -31,7 +27,7 @@ const UserCardList: FunctionComponent<UserCardListProps> = ({
     <div className="game-card-list">
       {userList
         ? userList.map((user, index) => (
-            <UserCard user={user} key={index} id={id} isSubmit={isSubmit} />
+            <UserCard user={user} key={index} id={id} />
           ))
         : ""}
     </div>

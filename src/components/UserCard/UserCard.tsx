@@ -6,10 +6,9 @@ import "./UserCard.css";
 interface UserCardProps {
   user: UserType;
   id: string;
-  isSubmit: boolean;
 }
 
-const UserCard: FunctionComponent<UserCardProps> = ({ user, id, isSubmit }) => {
+const UserCard: FunctionComponent<UserCardProps> = ({ user, id }) => {
   const currUser = JSON.parse(localStorage.getItem("currentUserId")!);
 
   // Delete a user

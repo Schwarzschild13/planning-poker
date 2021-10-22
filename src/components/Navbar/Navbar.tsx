@@ -6,7 +6,7 @@ interface NavbarProps {}
 const Navbar: FunctionComponent<NavbarProps> = () => {
   return (
     <div className="navbar">
-      <h1>Planning poker</h1>
+      <h1>Planning Poker</h1>
     </div>
   );
 };

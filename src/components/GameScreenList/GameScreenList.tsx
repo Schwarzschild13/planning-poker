@@ -121,7 +121,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   return (
     <div>
       <div className="navbar-gamescreen">
-        <h1>Planning poker</h1>
+        <h1>Planning Poker</h1>
         {userName && (
           <p>
             Hello, <b>{`${userName}`}</b>
@@ -239,7 +239,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       {/* game list */}
 
       <div className="game-list">
-        <UserCardList id={id} isSubmit={isSubmit} />
+        <UserCardList id={id} />
       </div>
     </div>
   );

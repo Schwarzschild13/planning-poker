@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { v1 as uuidv1 } from "uuid";
 import { AdminContext } from "../../context/Context";
 import "./Welcome.css";
+import poker from "../../assets/poker.jpg";
 
 interface WelcomeProps {}
 
@@ -52,6 +53,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 
   return (
     <div>
+      {/* <img className="welcome-img" src={poker} alt="" /> */}
       <h1>Welcome</h1>
       <div className="welcome-form">
         <button onClick={createGame} className="create-btn">
