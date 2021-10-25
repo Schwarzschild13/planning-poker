@@ -18,6 +18,7 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
   const [usersList, setUsersList] = useState<Array<UserType>>();
 
   useEffect(() => {
+    let mounted = true;
     const userRef = firebase.database().ref(id);
     userRef.on("value", (snapshot) => {
       const users = snapshot.val();
@@ -25,8 +26,14 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
       for (let id in users) {
         usersList.push({ id, ...users[id] });
       }
-      setUsersList(usersList);
+      if (mounted) {
+        setUsersList(usersList);
+      }
     });
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   // Redirect to lists

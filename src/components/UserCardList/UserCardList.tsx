@@ -12,6 +12,7 @@ const UserCardList: FunctionComponent<UserCardListProps> = ({ id }) => {
   const [userList, setUserList] = useState<Array<UserType>>();
 
   useEffect(() => {
+    let mounted = true;
     const userRef = firebase.database().ref(id);
     userRef.on("value", (snapshot) => {
       const users = snapshot.val();
@@ -19,8 +20,14 @@ const UserCardList: FunctionComponent<UserCardListProps> = ({ id }) => {
       for (let id in users) {
         userList.push({ id, ...users[id] });
       }
-      setUserList(userList);
+      if (mounted) {
+        setUserList(userList);
+      }
     });
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   return (

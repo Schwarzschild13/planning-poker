@@ -9,6 +9,7 @@ import { UserType } from "../../types/UserType";
 import UserCardList from "../UserCardList/UserCardList";
 import { useParams, useHistory } from "react-router-dom";
 import "./GameScreenList.css";
+import { cleanup } from "@testing-library/react";
 
 interface GameScreenListProps {}
 
@@ -31,6 +32,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const userId = JSON.parse(localStorage.getItem("currentUserId")!);
 
   useEffect(() => {
+    let mounted = true;
     const userRef = firebase.database().ref(id);
     userRef.on("value", (snapshot) => {
       const users = snapshot.val();
@@ -38,25 +40,37 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       for (let id in users) {
         usersList.push({ id, ...users[id] });
       }
-
-      setUsersList(usersList);
-      if (users !== null) {
-        setUserName(users[userId]?.title);
-        setAdmin(users[userId]?.isAdmin);
-        setUserNum(users[userId]?.num);
+      if (mounted) {
+        setUsersList(usersList);
+        if (users !== null) {
+          setUserName(users[userId]?.title);
+          setAdmin(users[userId]?.isAdmin);
+          setUserNum(users[userId]?.num);
+        }
       }
     });
-    setAvg(true);
+    if (mounted) {
+      setAvg(true);
+    }
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   useEffect(() => {
-    if (userNum !== 0) {
-      setIsSubmit(true);
-      console.log("useeffect true");
-    } else {
-      setIsSubmit(false);
-      console.log("useeffect false");
+    let mounted = true;
+    if (mounted) {
+      if (userNum !== 0) {
+        setIsSubmit(true);
+        console.log("useeffect true");
+      } else {
+        setIsSubmit(false);
+        console.log("useeffect false");
+      }
     }
+    return function cleanup() {
+      mounted = false;
+    };
   }, [userNum]);
 
   // Reset on page reload
