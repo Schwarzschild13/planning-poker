@@ -9,7 +9,6 @@ import { UserType } from "../../types/UserType";
 import UserCardList from "../UserCardList/UserCardList";
 import { useParams, useHistory } from "react-router-dom";
 import "./GameScreenList.css";
-import { cleanup } from "@testing-library/react";
 
 interface GameScreenListProps {}
 
@@ -55,7 +54,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [id, userId]);
 
   useEffect(() => {
     let mounted = true;
@@ -80,7 +79,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   };
 
   const flipCards = (a: boolean) => {
-    usersList?.map((user) => {
+    usersList?.forEach((user) => {
       const userRef = firebase.database().ref(id).child(user.id);
       userRef.update({
         flip: a,
@@ -89,7 +88,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   };
 
   const onReset = () => {
-    usersList?.map((user) => {
+    usersList?.forEach((user) => {
       const userRef = firebase.database().ref(id).child(user.id);
       userRef.update({
         num: 0,
@@ -100,7 +99,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const averageScore = () => {
     let count = 0;
     let sum = 0;
-    usersList?.map((user) => {
+    usersList?.forEach((user) => {
       if (user.num !== 0) {
         count = count + 1;
         sum = sum + user.num;

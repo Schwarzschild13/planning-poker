@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import "../../App.css";
 import { UserType } from "../../types/UserType";
 import "./UserCard.css";

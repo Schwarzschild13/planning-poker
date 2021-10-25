@@ -11,8 +11,8 @@ interface FormProps {
 }
 
 const Form: FunctionComponent<FormProps> = ({ id }) => {
-  const [state, setState] = useLocalStorage("currentUserId", "");
-  const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const [, setState] = useLocalStorage("currentUserId", "");
+  const { isAdmin } = useContext(AdminContext);
   const [title, setTitle] = useState("");
   const history = useHistory();
   const [usersList, setUsersList] = useState<Array<UserType>>();
@@ -34,7 +34,7 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [id]);
 
   // Redirect to lists
   const toList = () => {
@@ -49,7 +49,7 @@ const Form: FunctionComponent<FormProps> = ({ id }) => {
   };
 
   const createUser = () => {
-    usersList?.map((user) => {
+    usersList?.forEach((user) => {
       const userRef = firebase.database().ref(id).child(user.id);
       userRef.update({
         flip: false,

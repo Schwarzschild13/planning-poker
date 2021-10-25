@@ -28,7 +28,7 @@ const UserCardList: FunctionComponent<UserCardListProps> = ({ id }) => {
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [id]);
 
   return (
     <div className="game-card-list">

@@ -1,15 +1,13 @@
-import firebase from "firebase/compat";
-import { FunctionComponent, useContext, useState } from "react";
+import { FunctionComponent, useContext } from "react";
 import { useHistory } from "react-router";
 import { v1 as uuidv1 } from "uuid";
 import { AdminContext } from "../../context/Context";
 import "./Welcome.css";
-import poker from "../../assets/poker.jpg";
 
 interface WelcomeProps {}
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
-  const { isAdmin, toggleAdmin } = useContext(AdminContext);
+  const { toggleAdmin } = useContext(AdminContext);
   // const [games, setGames] = useState<Array<string>>();
 
   let gameId: string;
