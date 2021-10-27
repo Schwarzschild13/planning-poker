@@ -26,6 +26,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   const [userNum, setUserNum] = useState<number>();
   const [userName, setUserName] = useState<string>();
   const [copied, setCopied] = useState<boolean>(false);
+  const [isFlip, setisFlip] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const [usersList, setUsersList] = useState<Array<UserType>>();
   const userId = JSON.parse(localStorage.getItem("currentUserId")!);
@@ -45,6 +46,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           setUserName(users[userId]?.title);
           setAdmin(users[userId]?.isAdmin);
           setUserNum(users[userId]?.num);
+          setisFlip(users[userId]?.flip);
         }
       }
     });
@@ -55,6 +57,15 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
       mounted = false;
     };
   }, [id, userId]);
+
+  useEffect(() => {
+    console.log("inside useEffect", isFlip);
+    if (isFlip) {
+      setAvg(false);
+    } else {
+      setAvg(true);
+    }
+  }, [isFlip]);
 
   useEffect(() => {
     let mounted = true;
@@ -240,7 +251,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
             onClick={() => {
               if (averageScore() !== -1) {
                 flipCards(true);
-                setAvg(false);
+                // setAvg(false);
                 console.log(averageScore());
               } else {
                 alert("Select a number and click submit");
@@ -253,7 +264,7 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
           <button
             className="reset game-btn"
             onClick={() => {
-              setAvg(true);
+              // setAvg(true);
               flipCards(false);
               onReset();
             }}
