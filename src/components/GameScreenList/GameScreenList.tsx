@@ -157,12 +157,17 @@ const GameScreenList: FunctionComponent<GameScreenListProps> = () => {
   return (
     <div>
       <div className="navbar-gamescreen">
-        <h1>Planning Poker</h1>
-        {userName && (
-          <p>
-            Hello, <b>{`${userName}`}</b>
-          </p>
-        )}
+        <div
+          className="heading-btn"
+          onClick={() => {
+            window.confirm("You will be removed from the game. Continue?");
+            deleteUser();
+          }}
+        >
+          <h1>Planning Poker</h1>
+        </div>
+
+        <p>Hello, {userName && <b>{`${userName}`}</b>}</p>
       </div>
       <div className="room-data">
         <p>

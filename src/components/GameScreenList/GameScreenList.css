@@ -94,7 +94,11 @@ button {
   align-items: center;
 }
 
-.navbar-gamescreen > h1 {
+.heading-btn {
+  cursor: pointer;
+}
+
+.heading-btn > h1 {
   text-align: left;
   font-size: 1.5em;
   font-weight: 400;
