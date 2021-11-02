@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent, useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { v1 as uuidv1 } from "uuid";
 import { AdminContext } from "../../context/Context";
@@ -7,7 +7,7 @@ import "./Welcome.css";
 interface WelcomeProps {}
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
-  const { toggleAdmin } = useContext(AdminContext);
+  const { isAdmin, toggleAdmin } = useContext(AdminContext);
   // const [games, setGames] = useState<Array<string>>();
 
   let gameId: string;
@@ -15,8 +15,12 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
   const createGame = () => {
     let path = `/${uuidv1()}`;
     history.push(path);
-    toggleAdmin();
+    toggleAdmin(true);
   };
+
+  useEffect(() => {
+    toggleAdmin(false);
+  }, []);
 
   // Check for valid games before joining a game
 

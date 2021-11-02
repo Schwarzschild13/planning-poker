@@ -2,12 +2,12 @@ import { createContext, FunctionComponent, useState } from "react";
 
 interface AdminType {
   isAdmin: boolean;
-  toggleAdmin: () => void;
+  toggleAdmin: (val: boolean) => void;
 }
 
 const initState: AdminType = {
   isAdmin: false,
-  toggleAdmin: () => {},
+  toggleAdmin: (val: boolean) => {},
 };
 
 export const AdminContext = createContext<AdminType>(initState);
@@ -19,9 +19,9 @@ interface AdminProviderProps {
 const AdminProvider: FunctionComponent<AdminProviderProps> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
-  const toggleAdmin = () => {
+  const toggleAdmin = (val: boolean) => {
     console.log("toggleAdmin from context", isAdmin);
-    setIsAdmin((prev) => !prev);
+    setIsAdmin(val);
   };
 
   return (
